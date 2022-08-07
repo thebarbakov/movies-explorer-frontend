@@ -1,0 +1,46 @@
+.techs {
+    background-color: #F5F5F5;
+}
+
+.techs__subtitle {
+  margin: 90px auto 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+}
+
+.techs__text {
+  margin: 26px auto 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.techs__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin: 100px auto 0;
+}
+
+.techs__item {
+  margin: 0 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8e8e8;
+  border-radius: 10px;
+  height: 60px;
+  width: 90px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.techs__item:last-of-type {
+    margin: 0;
+  }
