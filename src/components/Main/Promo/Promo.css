@@ -1,7 +1,7 @@
 .promo {
   display: flex;
   flex-direction: column;
-  background-color: #DDDEE3;
+  background-color: #dddee3;
   padding: 50px 70px 60px;
 }
 
@@ -17,4 +17,43 @@
   margin-top: 102px;
   width: 722px;
   align-self: flex-end;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .promo {
+    padding: 0 44px 60px;
+  }
+  .promo__title {
+    width: 100%;
+    text-align: center;
+    margin-top: 300px;
+  }
+
+  .promo__image {
+    margin-top: 140px;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    padding: 0 0 40px;
+  }
+  .promo__title {
+    margin-top: 183px;
+    font-size: 31px;
+    text-align: center;
+    line-height: 39px;
+    width: 100%;
+    letter-spacing: -0.04em;
+  }
+
+  .promo__image {
+    margin-top: 60px;
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+  }
 }

@@ -1,5 +1,5 @@
-.about-project{
-  background-color: #FAFAFA;
+.about-project {
+  background-color: #fafafa;
 }
 
 .about-project__info {
@@ -73,6 +73,53 @@
   left: 0;
   text-align: center;
   width: 100%;
-  color: #A0A0A0;
+  color: #a0a0a0;
   margin: 0;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .about-project__block {
+    margin: 0 30px 0 0;
+  }
+
+  .about-project__text {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 22px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__info {
+    flex-direction: column;
+    margin-top: 60px;
+  }
+  .about-project__block {
+    width: 100%;
+    margin: 56px 0 0;
+  }
+  .about-project__block:first-of-type {
+    margin: 0;
+  }
+  .about-project__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .about-project__text {
+    margin-top: 16px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about-project__timeline {
+    margin-top: 60px;
+  }
+  .timeline__backend,
+  .timeline__frontend {
+    font-size: 11px;
+    line-height: 13px;
+  }
+  .timeline__note {
+    font-size: 11px;
+    line-height: 13px;
+  }
 }

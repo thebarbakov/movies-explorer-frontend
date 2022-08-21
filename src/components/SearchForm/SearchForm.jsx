@@ -15,6 +15,13 @@ export default function SearchForm() {
     });
   };
 
+  const handleSwitch = () => {
+    setForm({
+      ...form,
+      isShort: !form.isShort,
+    });
+  };
+
   return (
     <section className="search-form">
       <form className="search-form__form">
@@ -32,10 +39,16 @@ export default function SearchForm() {
           </button>
         </div>
         <div className="search-form__is-short">
-            <button className={`search-form__switcher switcher${form.isShort ? ' switcher_active' : ''}`} type="button">
-                <div className="switcher__circle" />
-            </button>
-            <p className="search-form__label">Короткометражки</p>
+          <button
+            className={`search-form__switcher switcher${
+              form.isShort ? " switcher_active" : ""
+            }`}
+            type="button"
+            onClick={handleSwitch}
+          >
+            <div className="switcher__circle" />
+          </button>
+          <p className="search-form__label">Короткометражки</p>
         </div>
       </form>
       <div className="search-form__line" />

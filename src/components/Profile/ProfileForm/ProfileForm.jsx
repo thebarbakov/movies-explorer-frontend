@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./ProfileForm.css";
 
 export default function ProfileForm() {
+  const [error, setError] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   return (
     <div className="profile">
@@ -26,30 +27,27 @@ export default function ProfileForm() {
             className="profile__input"
           />
         </div>
+        {error ? <p className="authentication__error">{error}</p> : ''}
         <div className="profile__buttons">
-          {isEdit ? (
-            <button
-              type="submit"
-              className="profile__button profile__button_save"
-            >
-              Сохранить
-            </button>
-          ) : (
-            <>
-              <button
-                type="button"
-                className="profile__button profile__button_edit"
-              >
-                Редактировать
-              </button>
-              <button
-                type="button"
-                className="profile__button profile__button_exit"
-              >
-                Выйти из аккаунта
-              </button>
-            </>
-          )}
+          <button
+            type="submit"
+            className={`profile__button profile__button_save${!isEdit ? ' profile__button_inactive' : ''}`}
+          >
+            Сохранить
+          </button>
+          <button
+            type="button"
+            className={`profile__button profile__button_edit${isEdit ? ' profile__button_inactive' : ''}`}
+            onClick={() => setIsEdit(true)}
+          >
+            Редактировать
+          </button>
+          <button
+            type="button"
+            className={`profile__button profile__button_exit${isEdit ? ' profile__button_inactive' : ''}`}
+          >
+            Выйти из аккаунта
+          </button>
         </div>
       </form>
     </div>
