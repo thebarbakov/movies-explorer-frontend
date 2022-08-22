@@ -20,8 +20,8 @@ export default function MoviesCard({ film }) {
           backgroundImage: `url(https://api.nomoreparties.co${film.image.url})`,
         }}
       >
-        <button className="movies-card__button movies-card__button_save">Сохрнаить</button>
-        <button className="movies-card__button movies-card__button_delete" />
+        <button className="movies-card__button movies-card__button_save" type="button">Сохрнаить</button>
+        {/* <button className="movies-card__button movies-card__button_delete" type="button"/> */}
       </div>
       <div className="movies-card__info">
         <p className="movies-card__name">{film.nameRU}</p>

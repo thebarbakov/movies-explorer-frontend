@@ -64,6 +64,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .techs {
+    background-color: #fafafa;
+  }
   .techs__subtitle {
     font-size: 30px;
     line-height: 36px;

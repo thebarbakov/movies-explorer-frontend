@@ -6,7 +6,7 @@ export default function Navigation({ setIsOpen, isOpen}) {
   return (
       <div className={`navigation${isOpen ? " navigation_openend" : ""}`}>
         <div className="navigation__container">
-          <button className="navigation__close-button" onClick={() => setIsOpen(false)} />
+          <button className="navigation__close-button" onClick={() => setIsOpen(false)} type="button"/>
           <ul className="navigation__list">
             <li className="navigation__element">
               <NavLink className="navigation__link" to="/">Главная</NavLink>

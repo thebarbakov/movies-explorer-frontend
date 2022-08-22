@@ -12,6 +12,7 @@ export default function ProfileForm() {
         <div className="profile__input-group">
           <label className="profile__label">Имя</label>
           <input
+            required
             type="text"
             name="name"
             value="Ярослав"

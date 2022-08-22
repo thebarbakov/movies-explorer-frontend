@@ -25,12 +25,12 @@ export default function AboutMe() {
             представляет собой интересный эксперимент проверки модели развития.
           </p>
           <div className="about-me__links">
-            <Link className="about-me__link">
+            <a className="about-me__link" href="https://github.com/thebarbakov" target="_blank" rel="noreferrer">
               GitHub
-            </Link>
-            <Link className="about-me__link">
+            </a>
+            <a className="about-me__link" href="https://instagram.com/thebarbakov" target="_blank" rel="noreferrer">
               Instagram
-            </Link>
+            </a>
           </div>
         </div>
         <div className="about-me__column about-me__column_avatar">

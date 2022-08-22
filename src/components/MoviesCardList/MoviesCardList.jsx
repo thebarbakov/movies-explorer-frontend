@@ -13,7 +13,7 @@ const MoviesCardList = ({ films }) => {
           : ""}
       </div>
       <div className="movies-list__block">
-        <button className="movies-list__button">Ещё</button>
+        <button className="movies-list__button" type="button">Ещё</button>
       </div>
     </section>
   );

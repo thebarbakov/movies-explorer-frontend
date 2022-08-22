@@ -6,7 +6,9 @@ export default function Profile() {
   return (
     <>
     <Header />
-    <ProfileForm />
+    <main>
+      <ProfileForm />
+    </main>
     </>
   )
 }

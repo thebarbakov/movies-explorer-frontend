@@ -21,9 +21,11 @@ export default function SavedMovies() {
   return (
     <>
       <Header className="movies-saved__header"/>
+      <main>
       <SearchForm />
       <MoviesCardList films={films} />
       <Footer />
+      </main>
     </>
   );
 }

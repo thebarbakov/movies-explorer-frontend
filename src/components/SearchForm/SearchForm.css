@@ -12,6 +12,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  transition: border-color 0.2s ease-in-out;
 }
 .search-form__input {
   font-weight: 400;
@@ -24,6 +25,10 @@
   outline: none;
   border-radius: 8px;
   background-color: transparent;
+}
+
+.search-form__group:focus-within {
+  border: 1.5px solid #aaaaaa;
 }
 
 .search-form__button {

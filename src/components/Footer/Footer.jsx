@@ -13,8 +13,8 @@ const Footer = () => {
       <div className="footer__main">
         <p className="footer__year">© {new Date().getFullYear()}</p>
         <div className="footer__links">
-          <Link className="footer__link">GitHub</Link>
-          <Link className="footer__link">Instagram</Link>
+          <Link className="footer__link" href="https://github.com/thebarbakov" target="_blank" >GitHub</Link>
+          <Link className="footer__link" gref="https://instagram.com/thebarbakov" target="_blank">Instagram</Link>
         </div>
       </div>
     </footer>

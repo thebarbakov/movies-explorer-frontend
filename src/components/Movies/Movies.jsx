@@ -22,8 +22,10 @@ export default function Movies() {
   return (
     <>
       <Header className="movies__header"/>
-      <SearchForm />
-      <MoviesCardList films={films} />
+      <main>
+        <SearchForm />
+        <MoviesCardList films={films} />
+      </main>
       <Footer />
     </>
   );
