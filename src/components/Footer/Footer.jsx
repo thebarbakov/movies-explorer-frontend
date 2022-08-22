@@ -2,8 +2,6 @@ import React from "react";
 
 import "./Footer.css";
 
-import Link from "../Link/Link"; 
-
 const Footer = () => {
   return (
     <footer className="footer">
@@ -13,8 +11,30 @@ const Footer = () => {
       <div className="footer__main">
         <p className="footer__year">© {new Date().getFullYear()}</p>
         <div className="footer__links">
-          <Link className="footer__link" href="https://github.com/thebarbakov" target="_blank" >GitHub</Link>
-          <Link className="footer__link" gref="https://instagram.com/thebarbakov" target="_blank">Instagram</Link>
+        <a
+            className="footer__link"
+            href="https://practicum.yandex.ru/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Яндекс.Практикум
+          </a>
+          <a
+            className="footer__link"
+            href="https://github.com/thebarbakov"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+          <a
+            className="footer__link"
+            href="https://instagram.com/thebarbakov"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Instagram
+          </a>
         </div>
       </div>
     </footer>

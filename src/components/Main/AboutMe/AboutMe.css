@@ -36,6 +36,16 @@
   display: flex;
   flex-direction: row;
 }
+.about-me__link {
+  color: #000000;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 17px;
+  margin-right: 20px;
+}
+.about-me__link:last-of-type {
+  margin-right: 0;
+}
 .about-me__avatar {
   width: 270px;
   height: 327px;
@@ -43,7 +53,7 @@
   object-fit: cover;
 }
 
-.about-me__column_avatar{
+.about-me__column_avatar {
   display: flex;
   align-items: center;
 }
@@ -94,7 +104,6 @@
     margin-top: 40px;
   }
   .about-me__link {
-    font-size: 14px;
-    line-height: 17px;
+    margin-right: 26px;
   }
 }
