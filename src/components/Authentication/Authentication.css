@@ -1,0 +1,195 @@
+.authentication__form {
+  display: flex;
+  width: 390px;
+  margin: 0 auto;
+  flex-direction: column;
+  margin-top: 70px;
+}
+
+.authentication__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.authentication__title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  margin: 40px 0;
+}
+
+.authentication__input-group {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.authentication__input-group:first-of-type {
+  margin-top: 40px;
+}
+
+.authentication__label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #a0a0a0;
+}
+
+.authentication__input {
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  padding-bottom: 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.authentication__input:focus {
+  border-bottom: 1px solid #767676;
+}
+
+.authentication__button {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #ffffff;
+  background: #3456f3;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  padding: 13px 0 15px;
+  justify-self: end;
+  transition: background 0.2s ease-in-out;
+}
+
+.authentication__button:hover {
+  background: #3457f3c8;
+}
+
+
+.authentication__button_margin-top_xl {
+  margin-top: 221px;
+}
+
+.authentication__button_margin-top_l {
+  margin-top: 152px;
+}
+
+.authentication__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #a0a0a0;
+}
+
+.authentication__link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #3456f3;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.authentication__link:hover {
+  color: #3457f3c8;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .authentication__form {
+    margin-top: 232px;
+  }
+
+  .authentication__logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .authentication__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #a0a0a0;
+    padding-bottom: 232px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .authentication__form {
+    display: flex;
+    width: calc(100% - 60px);
+    margin: 0 auto;
+    padding: 0 30px;
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .authentication__logo {
+    width: 38px;
+    height: 38px;
+    margin: 56px auto 0;
+  }
+
+  .authentication__title {
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin: 50px 0 0;
+  }
+
+  .authentication__input-container{
+    margin-top: 80px;
+  }
+
+  .authentication__input-group {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .authentication__input-group:first-of-type {
+    margin-top: 0;
+  }
+
+  .authentication__label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #a0a0a0;
+  }
+
+  .authentication__button {
+    padding: 15px 0;
+    width: 100%;
+  }
+
+  .authentication__button_margin-top_xl {
+    margin-top: 309px;
+  }
+
+  .authentication__button_margin-top_l {
+    margin-top: 237px;
+  }
+
+  .authentication__text {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 14px 0;
+  }
+
+  .authentication__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

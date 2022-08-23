@@ -1,0 +1,104 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 140px);
+  height: 74px;
+  padding: 0 70px;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.header__button-signup {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #000;
+  margin-right: 30px;
+}
+
+.header__button-signin {
+  text-decoration: none;
+  background: #3456f3;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  padding: 8px 20px;
+  transition: background 0.2s ease-in-out;
+}
+
+.header__button-signin:hover {
+  background: #3457f3c8;
+}
+
+.header__button {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000000;
+  text-decoration: none;
+  color: #000;
+  margin-right: 20px;
+}
+.header__button.active {
+  font-weight: 500;
+}
+.header__button:last-child {
+  margin-right: 0;
+}
+
+.header__button-profile {
+  border: 2px solid rgba(170, 170, 170, 0.2);
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+  text-decoration: none;
+  padding: 6px 10px;
+  margin-left: 50px;
+}
+
+.header__icon {
+  width: 12px;
+  height: 14px;
+  margin-right: 7px;
+  position: relative;
+  bottom: -2px;
+}
+
+.header__mobile-icon {
+  display: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .header__list {
+    display: none;
+  }
+  .header__mobile-icon {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__list {
+    display: none;
+  }
+  .header__mobile-icon {
+    display: flex;
+  }
+  .header {
+    width: calc(100% - 28px);
+    padding: 18px 14px;
+    height: 38px;
+  }
+}
