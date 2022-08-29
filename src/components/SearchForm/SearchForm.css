@@ -1,7 +1,7 @@
 .search-form {
   display: flex;
   flex-direction: column;
-  width: calc(100% -140px);
+  width: calc(100% - 140px);
   padding: 70px 70px 10px;
   background-color: #fafafa;
 }
@@ -117,7 +117,7 @@
 
 @media screen and (max-width: 768px) {
   .search-form {
-    width: calc(100% -28px);
+    width: calc(100% - 28px);
     padding: 70px 14px 10px;
   }
 

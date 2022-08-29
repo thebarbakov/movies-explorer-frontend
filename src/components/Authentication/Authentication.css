@@ -72,7 +72,6 @@
   background: #3457f3c8;
 }
 
-
 .authentication__button_margin-top_xl {
   margin-top: 221px;
 }
@@ -102,6 +101,13 @@
 
 .authentication__link:hover {
   color: #3457f3c8;
+}
+
+.authentication__error {
+  color: #ee3465;
+  font-size: 10px;
+  line-height: 12px;
+  margin: 6px 0 0;
 }
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
@@ -147,7 +153,7 @@
     margin: 50px 0 0;
   }
 
-  .authentication__input-container{
+  .authentication__input-container {
     margin-top: 80px;
   }
 

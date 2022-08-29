@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../images/logo.svg";
+import { ToolsContext } from "../../utils/сontext/ToolsContext";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import mainApi from "../../utils/MainApi";
 
 import "./Authentication.css";
 
@@ -12,12 +15,78 @@ export default function SignIn({ isRegister }) {
     email: "",
     password: "",
   });
+  const [valid, setValid] = useState({});
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setValid({
+      ...valid,
+      [e.target.name]: {
+        isValid: e.target.validity.valid,
+        message: !e.target.validity.valid ? e.target.validationMessage : "",
+      },
+    });
+  };
+  const navigator = useNavigate();
+  const toolsContext = React.useContext(ToolsContext);
+
+  useEffect(() => {
+    isRegister
+      ? setValid({
+          name: { isValid: false, message: "Не заполнено имя" },
+          email: { isValid: false, message: "Не заполнен E-Mail" },
+          password: { isValid: false, message: "Не заполнен пароль" },
+        })
+      : setValid({
+          email: { isValid: false, message: "Не заполнен E-Mail" },
+          password: { isValid: false, message: "Не заполнен пароль" },
+        });
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const inputs = Object.keys(valid);
+    let validationErrors = null;
+    inputs.forEach((input, index) => {
+      if (!valid[input].isValid) {
+        if (validationErrors === null) validationErrors = valid[input].message;
+        else validationErrors += `, ${valid[input].message}`;
+      }
+    });
+    if (validationErrors) {
+      setError(validationErrors);
+      return;
+    }
+    toolsContext.setIsLoading(true);
+    if (isRegister) {
+      mainApi
+        .signUp({ name: form.name, email: form.email, password: form.password })
+        .then(() => {
+          navigator("/signin");
+        })
+        .catch((err) => {
+          err.json().then((err) => setError(err.message));
+        })
+        .finally(() => {
+          toolsContext.setIsLoading(false);
+        });
+    } else {
+      mainApi
+        .signIn({ email: form.email, password: form.password })
+        .then((data) => {
+          toolsContext.setCurrentUser(data);
+          navigator("/movies");
+        })
+        .catch((err) => {
+          err.json().then((err) => setError(err.message));
+        })
+        .finally(() => {
+          toolsContext.setIsLoading(false);
+        });
+    }
   };
   return (
     <main>
-      <form className="authentication__form">
+      <form className="authentication__form" onSubmit={handleSubmit} noValidate>
         <img className="authentication__logo" src={logo} alt="logo" />
         <h1 className="authentication__title">
           {isRegister ? "Добро пожаловать!" : "Рады видеть!"}
@@ -36,6 +105,8 @@ export default function SignIn({ isRegister }) {
                 name="name"
                 onChange={handleChange}
                 value={form.name}
+                maxLength="30"
+                minLength="2"
               />
             </div>
           ) : (
