@@ -45,8 +45,7 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
 }
 
 .movies-card__button_save {
@@ -61,7 +60,6 @@
   text-align: center;
   color: #000000;
   padding: 6px 7px;
-  width: 72px;
   height: 21px;
   position: absolute;
   top: 14px;
@@ -83,10 +81,6 @@
   position: absolute;
   top: 14px;
   right: 14px;
-}
-
-.movies-card__image:hover .movies-card__button {
-  opacity: 1;
 }
 
 @media screen and (max-width: 768px) {

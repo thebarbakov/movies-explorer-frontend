@@ -16,15 +16,32 @@ export default function SignIn({ isRegister }) {
     password: "",
   });
   const [valid, setValid] = useState({});
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setValid({
-      ...valid,
-      [e.target.name]: {
-        isValid: e.target.validity.valid,
-        message: !e.target.validity.valid ? e.target.validationMessage : "",
-      },
-    });
+    if (e.target.name === "email") {
+      const isValid = e.target.value.match(
+        /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
+      );
+      setValid({
+        ...valid,
+        email: {
+          isValid: isValid,
+          message: !isValid
+            ? `Введите корректный адрес электронной почты.`
+            : null,
+        },
+      });
+    } else {
+      setValid({
+        ...valid,
+        [e.target.name]: {
+          isValid: e.target.validity.valid,
+          message: !e.target.validity.valid ? e.target.validationMessage : null,
+        },
+      });
+    }
+
   };
   const navigator = useNavigate();
   const toolsContext = React.useContext(ToolsContext);
@@ -61,13 +78,24 @@ export default function SignIn({ isRegister }) {
       mainApi
         .signUp({ name: form.name, email: form.email, password: form.password })
         .then(() => {
-          navigator("/signin");
+          mainApi
+            .signIn({ email: form.email, password: form.password })
+            .then((data) => {
+              toolsContext.setCurrentUser(data);
+              navigator("/movies");
+            })
+            .catch((err) => {
+              err.json().then((err) => setError(err.message));
+            })
+            .finally(() => {
+              toolsContext.setIsLoading(false);
+            });
         })
         .catch((err) => {
-          err.json().then((err) => setError(err.message));
-        })
-        .finally(() => {
-          toolsContext.setIsLoading(false);
+          err.json().then((err) => {
+            setError(err.message);
+            toolsContext.setIsLoading(false);
+          });
         });
     } else {
       mainApi
@@ -87,7 +115,9 @@ export default function SignIn({ isRegister }) {
   return (
     <main>
       <form className="authentication__form" onSubmit={handleSubmit} noValidate>
-        <img className="authentication__logo" src={logo} alt="logo" />
+        <Link to="/">
+          <img className="authentication__logo" src={logo} alt="logo" />
+        </Link>
         <h1 className="authentication__title">
           {isRegister ? "Добро пожаловать!" : "Рады видеть!"}
         </h1>

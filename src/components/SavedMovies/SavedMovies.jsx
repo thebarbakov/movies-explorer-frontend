@@ -5,6 +5,8 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
+import { shortFilmDuration } from "../../utils/constants"
+
 import "./SavedMovies.css";
 
 export default function SavedMovies({
@@ -22,7 +24,7 @@ export default function SavedMovies({
       .filter((element) =>
         element.nameRU.toLowerCase().includes(querry.search.toLowerCase())
       )
-      .filter((element) => element.duration > (querry.isShort ? 0 : 40));
+      .filter((element) => element.duration > (querry.isShort ? 0 : shortFilmDuration));
     if (querryResult.length === 0) setMessage("Ничего не найдено(");
     else setFilms(querryResult);
   };

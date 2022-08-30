@@ -26,7 +26,6 @@ export default function MoviesCard({
     e.stopPropagation();
     unsaveMovie(isSavedMovie ? film._id : film.id);
   };
-
   return (
     <div className="movies-card">
       <a href={film.trailerLink} target="_blank" rel="noreferrer">
@@ -44,13 +43,23 @@ export default function MoviesCard({
               type="button"
               onClick={deleteMovie}
             />
-          ) : (
+          ) : isSavedMovie ? (
+            ""
+          ) : (Boolean(film.country) & Boolean(film.director) & Boolean(film.nameEN) & Boolean(film.nameRU)) ? (
             <button
               className="movies-card__button movies-card__button_save"
               type="button"
               onClick={saveMovie}
             >
               Сохранить
+            </button>
+          ) : (
+            <button
+              className="movies-card__button movies-card__button_save"
+              type="button"
+              disabled
+            >
+              Не доступен
             </button>
           )}
         </div>

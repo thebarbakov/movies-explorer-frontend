@@ -18,7 +18,7 @@ import Preloader from "./components/Preloader/Preloader";
 import { Redirect } from "./components/Redirect";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [savedMovies, setSavedMovies] = useState(null);
@@ -28,10 +28,12 @@ function App() {
       if (!currentUser.token) {
         localStorage.removeItem("currentUser");
         setCurrentUser(null);
+        localStorage.removeItem("savedQuerry");
       } else localStorage.setItem("currentUser", JSON.stringify(currentUser));
     } else {
-      JSON.parse(localStorage.getItem("currentUser")) &&
+      if (JSON.parse(localStorage.getItem("currentUser")))
         setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      else setCurrentUser(null);
     }
   }, [currentUser]);
 
@@ -116,11 +118,11 @@ function App() {
                 />
                 <Route
                   path="/signin"
-                  element={<Authentication isRegister={false} />}
+                  element={!currentUser ? <Authentication isRegister={false} /> : <Redirect to="/" />}
                 />
                 <Route
                   path="/signup"
-                  element={<Authentication isRegister={true} />}
+                  element={!currentUser ? <Authentication isRegister={true} /> : <Redirect to="/" />}
                 />
               </>
             )}

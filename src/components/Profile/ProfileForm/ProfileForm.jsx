@@ -12,6 +12,7 @@ export default function ProfileForm({ setCurrentUser }) {
     email: "",
   });
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const toolsContext = React.useContext(ToolsContext);
   const navigator = useNavigate();
@@ -21,21 +22,60 @@ export default function ProfileForm({ setCurrentUser }) {
     email: { isValid: true, message: "" },
   });
 
+  const [initForm, setInitForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const [hasChanged, setHasChanged] = useState(false);
+
   const handleSignOut = (e) => {
     toolsContext.setCurrentUser({});
     navigator("/");
   };
 
+  const changeToEditMode = (status) => {
+    setError(null);
+    setIsEdit(status);
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setValid({
-      ...valid,
-      [e.target.name]: {
-        isValid: e.target.validity.valid,
-        message: !e.target.validity.valid ? e.target.validationMessage : null,
-      },
-    });
+    if (e.target.name === "email") {
+      const isValid = e.target.value.match(
+        /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
+      );
+      setValid({
+        ...valid,
+        email: {
+          isValid: isValid,
+          message: !isValid
+            ? `Введите корректный адрес электронной почты.`
+            : null,
+        },
+      });
+    } else {
+      setValid({
+        ...valid,
+        [e.target.name]: {
+          isValid: e.target.validity.valid,
+          message: !e.target.validity.valid ? e.target.validationMessage : null,
+        },
+      });
+    }
   };
+
+  useEffect(() => {
+    const initFormKeys = Object.keys(initForm);
+    let hasChanged = false;
+    initFormKeys.forEach((element) => {
+      if (initForm[element] !== form[element]) {
+        hasChanged = true;
+      }
+    });
+    setHasChanged(hasChanged);
+  }, [form]);
 
   useEffect(() => {
     toolsContext.setIsLoading(true);
@@ -43,6 +83,7 @@ export default function ProfileForm({ setCurrentUser }) {
       .getInfoMe()
       .then(({ name, email }) => {
         setForm({ name, email });
+        setInitForm({ name, email });
       })
       .catch((err) => {
         toolsContext.setIsError(true);
@@ -58,7 +99,7 @@ export default function ProfileForm({ setCurrentUser }) {
     let validationErrors = null;
     inputs.forEach((input, index) => {
       if (!valid[input].isValid) {
-        if (index === 0) validationErrors = valid[input].message;
+        if (validationErrors === null) validationErrors = valid[input].message;
         else validationErrors += `, ${valid[input].message}`;
       }
     });
@@ -71,7 +112,9 @@ export default function ProfileForm({ setCurrentUser }) {
       .editInfoMe(form)
       .then(({ name, email }) => {
         setForm({ name, email });
-        setIsEdit(false);
+        setInitForm({ name, email });
+        changeToEditMode(false);
+        setSuccess(true);
       })
       .catch((err) => {
         err.json().then((err) => setError(err.message));
@@ -80,6 +123,10 @@ export default function ProfileForm({ setCurrentUser }) {
         toolsContext.setIsLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (success) setTimeout(() => setSuccess(false), 3000);
+  }, [success]);
   return (
     <div className="profile">
       <h1 className="profile__title">Привет, {form.name}!</h1>
@@ -114,33 +161,49 @@ export default function ProfileForm({ setCurrentUser }) {
         ) : (
           ""
         )}
+        {success ? (
+          <p className="authentication__success">Информация изменена!</p>
+        ) : (
+          ""
+        )}
         <div className="profile__buttons">
-          <button
-            type="submit"
-            className={`profile__button profile__button_save${
-              !isEdit ? " profile__button_inactive" : ""
-            }`}
-          >
-            Сохранить
-          </button>
-          <button
-            type="button"
-            className={`profile__button profile__button_edit${
-              isEdit ? " profile__button_inactive" : ""
-            }`}
-            onClick={() => setIsEdit(true)}
-          >
-            Редактировать
-          </button>
-          <button
-            type="button"
-            className={`profile__button profile__button_exit${
-              isEdit ? " profile__button_inactive" : ""
-            }`}
-            onClick={handleSignOut}
-          >
-            Выйти из аккаунта
-          </button>
+          {isEdit ? (
+            <>
+              {hasChanged ? (
+                <button
+                  type="submit"
+                  className="profile__button profile__button_save"
+                >
+                  Сохранить
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="profile__button profile__button_edit"
+                  onClick={() => changeToEditMode(false)}
+                >
+                  Отменить
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                className="profile__button profile__button_edit"
+                onClick={() => changeToEditMode(true)}
+              >
+                Редактировать
+              </button>
+              <button
+                type="button"
+                className="profile__button profile__button_exit"
+                onClick={handleSignOut}
+              >
+                Выйти из аккаунта
+              </button>
+            </>
+          )}
         </div>
       </form>
     </div>

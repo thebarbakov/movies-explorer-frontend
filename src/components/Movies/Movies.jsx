@@ -6,6 +6,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 import moviesApi from "../../utils/MoviesApi";
+import { shortFilmDuration } from "../../utils/constants";
 
 import Preloader from "../Preloader/Preloader";
 
@@ -41,7 +42,9 @@ export default function Movies({
       .filter((element) =>
         element.nameRU.toLowerCase().includes(querry.search.toLowerCase())
       )
-      .filter((element) => element.duration > (querry.isShort ? 0 : 40));
+      .filter(
+        (element) => element.duration > (querry.isShort ? 0 : shortFilmDuration)
+      );
     if (querryResult.length === 0) setMessage("Ничего не найдено(");
     else {
       setQuerryResult(querryResult);
@@ -60,10 +63,13 @@ export default function Movies({
   };
 
   useEffect(() => {
-    JSON.parse(localStorage.getItem("savedQuerry")) &&
-      setQuerryResult(
-        JSON.parse(localStorage.getItem("savedQuerry")).querryResult
-      );
+    if (JSON.parse(localStorage.getItem("savedQuerry"))) {
+      JSON.parse(localStorage.getItem("savedQuerry")).querryResult.length > 0
+        ? setQuerryResult(
+            JSON.parse(localStorage.getItem("savedQuerry")).querryResult
+          )
+        : setMessage("Ничего не найдено(");
+    }
   }, []);
 
   return (

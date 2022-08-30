@@ -69,7 +69,7 @@ const MoviesCardList = ({
         )}
       </div>
       <div className="movies-list__block">
-        {films.length < count ? (
+        {count >= films.length ? (
           ""
         ) : (
           <button
