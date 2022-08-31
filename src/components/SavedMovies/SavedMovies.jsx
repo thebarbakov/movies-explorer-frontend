@@ -5,27 +5,59 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-import moviesApi from "../../utils/MoviesApi";
+import { shortFilmDuration } from "../../utils/constants"
 
 import "./SavedMovies.css";
 
-export default function SavedMovies() {
+export default function SavedMovies({
+  savedMovies,
+  addSavedMovie,
+  deleteSavedMovie,
+}) {
   const [films, setFilms] = useState(null);
+  const [message, setMessage] = useState(null);
+
+  const handleSearchQuerry = (querry) => {
+    setFilms(null);
+    setMessage(null);
+    const querryResult = savedMovies
+      .filter((element) =>
+        element.nameRU.toLowerCase().includes(querry.search.toLowerCase())
+      )
+      .filter((element) => element.duration > (querry.isShort ? 0 : shortFilmDuration));
+    if (querryResult.length === 0) setMessage("Ничего не найдено(");
+    else setFilms(querryResult);
+  };
 
   useEffect(() => {
-    moviesApi.getMovies().then((data) => {
-      setFilms(data.filter((film, index) => index < 3));
-    });
-  }, []);
-    //^^ Чтобы что-то было
+    setFilms(null);
+    setMessage(null);
+    if (savedMovies.length === 0)
+      setMessage("У вас еще нет сохраненных фильмов(");
+    else setFilms(savedMovies);
+  }, [savedMovies]);
+
   return (
     <>
-      <Header className="movies-saved__header"/>
+      <Header className="movies-saved__header" />
       <main>
-      <SearchForm />
-      <MoviesCardList films={films} />
-      <Footer />
+        <SearchForm
+          handleSearchQuerry={handleSearchQuerry}
+          isNotFirst={(message !== null) || (films !== null)}
+        />
+        {message ? <p className="movies__message">{message}</p> : ""}
+        {films ? (
+          <MoviesCardList
+            films={films}
+            addSavedMovie={addSavedMovie}
+            deleteSavedMovie={deleteSavedMovie}
+            isSaved={true}
+          />
+        ) : (
+          ""
+        )}
       </main>
+      <Footer />
     </>
   );
 }

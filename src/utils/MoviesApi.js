@@ -1,4 +1,8 @@
 class MoviesApi {
+  constructor({ url }) {
+    this._url = url;
+  }
+
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
@@ -6,16 +10,18 @@ class MoviesApi {
     return Promise.reject(res);
   }
 
-  getMovies(){
-    return fetch("https://api.nomoreparties.co/beatfilm-movies", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => this._checkResponse(res));
+  getMovies() {
+    return fetch(this._url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => this._checkResponse(res));
   }
 }
 
-const moviesApi = new MoviesApi();
+const moviesApi = new MoviesApi({
+  url: "https://api.nomoreparties.co/beatfilm-movies",
+});
 
 export default moviesApi;
